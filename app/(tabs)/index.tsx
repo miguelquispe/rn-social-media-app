@@ -9,8 +9,8 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      {/* <FeedScreen /> */}
-      <CreatePostScreen />
+      <FeedScreen />
+      {/* <CreatePostScreen /> */}
     </View>
   );
 }
