@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import React, { useState } from "react";
 import Endtypo from "@expo/vector-icons/Entypo";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -40,6 +40,12 @@ interface PostProps {
 }
 
 const Post = ({ post }: PostProps) => {
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+
+  const handleLike = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <View style={styles.post}>
       {/* Post component */}
@@ -79,8 +85,21 @@ const Post = ({ post }: PostProps) => {
         {/* Buttons */}
         <View style={styles.buttonsRow}>
           <View style={styles.iconButton}>
-            <AntDesign name="like2" size={18} color="gray" />
-            <Text style={styles.iconButtonText}>Like</Text>
+            <Pressable style={styles.iconButton} onPress={handleLike}>
+              <AntDesign
+                name="like2"
+                size={18}
+                color={isLiked ? "royalblue" : "gray"}
+              />
+              <Text
+                style={[
+                  styles.iconButtonText,
+                  { color: isLiked ? "royalblue" : "gray" },
+                ]}
+              >
+                Like
+              </Text>
+            </Pressable>
           </View>
           <View style={styles.iconButton}>
             <FontAwesome5 name="comment-alt" size={18} color="gray" />
