@@ -1,25 +1,24 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Image, StyleSheet, Platform, View, FlatList } from "react-native";
 
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import Post from "@/components/Post/Post";
+import FeedPost from "@/components/Post/Post";
+import { StatusBar } from "expo-status-bar";
+
+import posts from "../../assets/data/posts.json";
 
 export default function HomeScreen() {
   return (
-    <>
-      <Post />
-    </>
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+      <FlatList
+        data={posts}
+        renderItem={({ item }) => <FeedPost post={item} />}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
+  container: { flex: 1 },
   stepContainer: {
     gap: 8,
     marginBottom: 8,

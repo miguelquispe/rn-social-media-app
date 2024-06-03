@@ -21,65 +21,78 @@ const post = {
   numberOfShares: 2,
 };
 
-const Post = () => {
+interface Post {
+  id: string;
+  User: {
+    id: string;
+    image?: string;
+    name: string;
+  };
+  image?: string;
+  createdAt: string;
+  description: string;
+  numberOfLikes: number;
+  numberOfShares: number;
+}
+
+interface PostProps {
+  post: Post;
+}
+
+const Post = ({ post }: PostProps) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.post}>
       {/* Post component */}
-      <View style={styles.post}>
-        {/* Post Header with details about the author */}
-        <View style={styles.header}>
-          <Image
-            source={{ uri: post.User.image }}
-            style={styles.profileImage}
-          />
-          <View>
-            <Text style={styles.name}>{post.User.name}</Text>
-            <Text style={styles.subtitle}>{post.createdAt}</Text>
-          </View>
-          <Endtypo
-            name="dots-three-horizontal"
-            size={16}
-            color="black"
-            style={styles.icon}
-          />
+      {/* Post Header with details about the author */}
+      <View style={styles.header}>
+        <Image source={{ uri: post.User.image }} style={styles.profileImage} />
+        <View>
+          <Text style={styles.name}>{post.User.name}</Text>
+          <Text style={styles.subtitle}>{post.createdAt}</Text>
         </View>
+        <Endtypo
+          name="dots-three-horizontal"
+          size={16}
+          color="black"
+          style={styles.icon}
+        />
+      </View>
 
-        {/* Post body with description and image */}
-        <Text style={styles.description}>{post.description}</Text>
-        {post.image && (
-          <Image source={{ uri: post.image }} style={styles.image}></Image>
-        )}
+      {/* Post body with description and image */}
+      <Text style={styles.description}>{post.description}</Text>
+      {post.image && (
+        <Image source={{ uri: post.image }} style={styles.image}></Image>
+      )}
 
-        {/* Post footer with likes and button */}
-        <View style={styles.footer}>
-          {/* Stats row */}
-          <View style={styles.statsRow}>
-            <Image
-              source={require("@/assets/images/like.png")}
-              // style={{ alignSelf: "center" }}
-              style={styles.likeIcon}
-            />
-            <Text style={styles.likedBy}>Elon Musk and 11 others</Text>
-            <Text style={styles.shares}>2 shares</Text>
+      {/* Post footer with likes and button */}
+      <View style={styles.footer}>
+        {/* Stats row */}
+        <View style={styles.statsRow}>
+          <Image
+            source={require("@/assets/images/like.png")}
+            // style={{ alignSelf: "center" }}
+            style={styles.likeIcon}
+          />
+          <Text style={styles.likedBy}>Elon Musk and 11 others</Text>
+          <Text style={styles.shares}>2 shares</Text>
+        </View>
+        {/* Buttons */}
+        <View style={styles.buttonsRow}>
+          <View style={styles.iconButton}>
+            <AntDesign name="like2" size={18} color="gray" />
+            <Text style={styles.iconButtonText}>Like</Text>
           </View>
-          {/* Buttons */}
-          <View style={styles.buttonsRow}>
-            <View style={styles.iconButton}>
-              <AntDesign name="like2" size={18} color="gray" />
-              <Text style={styles.iconButtonText}>Like</Text>
-            </View>
-            <View style={styles.iconButton}>
-              <FontAwesome5 name="comment-alt" size={18} color="gray" />
-              <Text style={styles.iconButtonText}>Comment</Text>
-            </View>
-            <View style={styles.iconButton}>
-              <MaterialCommunityIcons
-                name="share-outline"
-                size={18}
-                color="gray"
-              />
-              <Text style={styles.iconButtonText}>Share</Text>
-            </View>
+          <View style={styles.iconButton}>
+            <FontAwesome5 name="comment-alt" size={18} color="gray" />
+            <Text style={styles.iconButtonText}>Comment</Text>
+          </View>
+          <View style={styles.iconButton}>
+            <MaterialCommunityIcons
+              name="share-outline"
+              size={18}
+              color="gray"
+            />
+            <Text style={styles.iconButtonText}>Share</Text>
           </View>
         </View>
       </View>
